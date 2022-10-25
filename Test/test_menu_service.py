@@ -1,16 +1,16 @@
-import Controllers.app as app
+import Controllers.application as application
 
 class TestMenu:
     def test_respose_status_for_get(self):
-        response = app.main().get_app().test_client().get('/getMenu/')
+        response = application.main().get_app().test_client().get('/getMenu/')
         assert response.status_code == 200
     
     def test_respose_status_for_post(self):
-        response = app.main().get_app().test_client().post('/getMenu/')
+        response = application.main().get_app().test_client().post('/getMenu/')
         assert response.status_code == 405
         
     def test_get_all_menu_items(self):
-        response = app.main().get_app().test_client().get('/getMenu/')
+        response = application.main().get_app().test_client().get('/getMenu/')
         assert response.status_code == 200
         assert {
                     "description": "king fish is for money, so we give it cheap. things are sometimes overrated",

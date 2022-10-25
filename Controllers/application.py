@@ -10,60 +10,60 @@ import traceback
  
 class FlaskAppWrapper():
     def __init__(self):
-        self.app = Flask(__name__)
+        self.application = Flask(__name__)
         self._config()
         self._add_services()
         
-        @self.app.route('/getTableSessions/', methods = ['GET'])
+        @self.application.route('/getTableSessions/', methods = ['GET'])
         def __table_Sessions():
             return self.get_table_sessions()
 
-        @self.app.route('/tables/price', methods=['GET'])
+        @self.application.route('/tables/price', methods=['GET'])
         def __table_Price():
             return self.get_table_prices()
 
-        @self.app.route('/transactionData/', methods=['POST'])
+        @self.application.route('/transactionData/', methods=['POST'])
         def __transaction_data():
             return self.transaction_data()
 
-        @self.app.route('/tables/<int:year>/<int:month>/<int:day>/<int:time_slot_id>', methods=['GET'])
+        @self.application.route('/tables/<int:year>/<int:month>/<int:day>/<int:time_slot_id>', methods=['GET'])
         def __available_tables(year, month, day, time_slot_id):
             return self.get_available_tables(year, month, day, time_slot_id)
         
-        @self.app.route('/getMenu/', methods = ['GET'])
+        @self.application.route('/getMenu/', methods = ['GET'])
         def __menu():
             return self.get_Menu()
     
-        @self.app.route('/getSuccessfullTransactions/<int:id>', methods = ['GET'])
+        @self.application.route('/getSuccessfullTransactions/<int:id>', methods = ['GET'])
         def __succeessful_transactions_by_id(id):
             return self.get_successful_transactions_by_id(id)
         
-        @self.app.route('/get_items_in_order/<int:order_id>', methods=['GET'])
+        @self.application.route('/get_items_in_order/<int:order_id>', methods=['GET'])
         def __items_in_order(order_id):
             return self.get_items_in_order(order_id)
 
-        @self.app.route('/feedback/', methods=['POST'])
+        @self.application.route('/feedback/', methods=['POST'])
         def __feedback():
             return self.insert_feedback()
         
-        @self.app.route('/get_overall_feedback/<int:id>', methods=['GET'])
+        @self.application.route('/get_overall_feedback/<int:id>', methods=['GET'])
         def __get_overall_feedback(id):
             return self.get_overall_feedback(id)
     
-        @self.app.route('/get_items_feedback/<int:id>', methods=['GET'])
+        @self.application.route('/get_items_feedback/<int:id>', methods=['GET'])
         def __get_items_feedback(id):
             return self.get_items_feedback(id)
     
         # admin apis
-        @self.app.route('/remove_transaction/<int:transaction_id>', methods=['GET'])
+        @self.application.route('/remove_transaction/<int:transaction_id>', methods=['GET'])
         def __remove_transaction(transaction_id):
             return self.remove_transaction(transaction_id)
         
-        @self.app.route('/remove_item_from_menu/<int:item_id>', methods=['GET'])
+        @self.application.route('/remove_item_from_menu/<int:item_id>', methods=['GET'])
         def __remove_item_from_menu(item_id):
             return self.remove_item_from_menu(item_id)
         
-        @self.app.route('/add_item_to_menu/', methods=['POST'])
+        @self.application.route('/add_item_to_menu/', methods=['POST'])
         def __add_item_to_menu():
             return self.add_item_to_menu()
     
@@ -141,11 +141,11 @@ class FlaskAppWrapper():
         return response
     
     def get_app(self):
-        return self.app
+        return self.application
          
     def _config(self):
-        CORS(self.app)
-        self.app.secret_key = os.urandom(24)
+        CORS(self.application)
+        self.application.secret_key = os.urandom(24)
     
     def _add_services(self):
         self.table_service = TableService()
@@ -235,13 +235,13 @@ class FlaskAppWrapper():
         return response
 
     def run(self, debug,  host, port):
-        self.app.run(debug=debug, host=host, port=port)
+        self.application.run(debug=debug, host=host, port=port)
 
 
 def main():
-    app = FlaskAppWrapper()
-    app.run(True, host='0.0.0.0', port=5000)
-    return app
+    application = FlaskAppWrapper()
+    application.run(True, host='0.0.0.0', port=5000)
+    return application
 
 if __name__ == '__main__':
     main()

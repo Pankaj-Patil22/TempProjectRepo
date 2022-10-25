@@ -1,40 +1,40 @@
-import Controllers.app as app
+import Controllers.application as application
 import json
 
 class TestTableHelper:
     def test_table_session_for_get(self):
-        response = app.main().get_app().test_client().get('/getTableSessions/')
+        response = application.main().get_app().test_client().get('/getTableSessions/')
         assert response.status_code == 200
         
     def test_table_session_for_post(self):
-        response = app.main().get_app().test_client().post('/getTableSessions/')
+        response = application.main().get_app().test_client().post('/getTableSessions/')
         assert response.status_code == 405
     
     def test_table_session_not_array(self):
-        response = app.main().get_app().test_client().get('/getTableSessions/')
+        response = application.main().get_app().test_client().get('/getTableSessions/')
         assert response.status_code == 200
         assert self.is_json_type_arr(response.get_data(as_text=True)) == False
     
     def test_table_session_content(self):
-        response = app.main().get_app().test_client().get('/getTableSessions/')
+        response = application.main().get_app().test_client().get('/getTableSessions/')
         assert response.status_code == 200
         assert self.is_table_session_data_valid(response.get_data(as_text=True)) == True
         
     def test_table_price_for_get(self):
-        response = app.main().get_app().test_client().get('/tables/price')
+        response = application.main().get_app().test_client().get('/tables/price')
         assert response.status_code == 200
     
     def test_table_price_for_post(self):
-        response = app.main().get_app().test_client().post('/tables/price')
+        response = application.main().get_app().test_client().post('/tables/price')
         assert response.status_code == 405
 
     def test_price_for_array(self):
-        response = app.main().get_app().test_client().get('/tables/price')
+        response = application.main().get_app().test_client().get('/tables/price')
         assert response.status_code == 200
         assert self.is_price_type_arr(response.get_data(as_text=True)) == True
     
     def test_price_for_array(self):
-        response = app.main().get_app().test_client().get('/tables/price')
+        response = application.main().get_app().test_client().get('/tables/price')
         assert response.status_code == 200
         assert self.is_price_data_valid(response.get_data(as_text=True)) == True
         

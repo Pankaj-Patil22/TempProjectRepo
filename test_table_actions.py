@@ -3,7 +3,7 @@ from unittest.mock import Mock, patch, create_autospec
 from sqlite3 import Date
 
 from flask import session
-from Controllers.app import FlaskAppWrapper
+from Controllers.application import FlaskAppWrapper
 from Actions.table_service_impl import TableServiceImpl
 from Models.table_model import TableReservations
 import Models.table_model as table_model
@@ -16,13 +16,13 @@ class TestTableApi(TestCase):
 
     def setUp(self):
         self.app_wrapper = FlaskAppWrapper()
-        self.app_wrapper.app.config['TESTING'] = True
-        self.app_wrapper.app.config['DEBUG'] = False
-        self.client = self.app_wrapper.app.test_client()
+        self.app_wrapper.application.config['TESTING'] = True
+        self.app_wrapper.application.config['DEBUG'] = False
+        self.client = self.app_wrapper.application.test_client()
     
     def tearDown(self):
-        self.app_wrapper.app.config['TESTING'] = False
-        self.app_wrapper.app.config['DEBUG'] = True
+        self.app_wrapper.application.config['TESTING'] = False
+        self.app_wrapper.application.config['DEBUG'] = True
 
     
     def test_get_available_tables_api_successful(self):

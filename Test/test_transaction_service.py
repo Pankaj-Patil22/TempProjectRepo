@@ -1,13 +1,13 @@
-import Controllers.app as app
+import Controllers.application as application
 import ast, json
 
 class TestTransaction:
     def test_respose_status_for_get(self):
-        response = app.main().get_app().test_client().get('/transactionData/')
+        response = application.main().get_app().test_client().get('/transactionData/')
         assert response.status_code == 405
         
     def test_respose_status_for_post(self):
-        response = app.main().get_app().test_client().post('/transactionData/')
+        response = application.main().get_app().test_client().post('/transactionData/')
         assert response.status_code == 200
     
     # not working 
@@ -31,25 +31,25 @@ class TestTransaction:
     "specialInstructions": "None None None"
 }
         obj = ast.literal_eval(a)
-        response = app.main().get_app().test_client().post('transactionData', data=a, follow_redirects=True)
+        response = application.main().get_app().test_client().post('transactionData', data=a, follow_redirects=True)
         assert response.status_code == 200
         assert response.json == {"success": True}
     
     def test_getSuccessfullTransactions_get_method(self):
-        response = app.main().get_app().test_client().get('/getSuccessfullTransactions/1')
+        response = application.main().get_app().test_client().get('/getSuccessfullTransactions/1')
         assert response.status_code == 200
     
     def test_getSuccessfullTransactions_post_method(self):
-        response = app.main().get_app().test_client().post('/getSuccessfullTransactions/1')
+        response = application.main().get_app().test_client().post('/getSuccessfullTransactions/1')
         assert response.status_code == 405
     
     def test_getSuccessfullTransactions_content(self):
-        response = app.main().get_app().test_client().get('/getSuccessfullTransactions/1')
+        response = application.main().get_app().test_client().get('/getSuccessfullTransactions/1')
         assert response.status_code == 200
         assert self.has_user_id(response.get_data(as_text=True)) == True
     
     def test_getSuccessfullTransactions_user_not_exits(self):
-        response = app.main().get_app().test_client().get('/getSuccessfullTransactions/0')
+        response = application.main().get_app().test_client().get('/getSuccessfullTransactions/0')
         assert response.status_code == 200
         assert self.has_user_id(response.get_data(as_text=True)) == False
     

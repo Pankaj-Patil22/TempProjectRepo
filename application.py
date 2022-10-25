@@ -1,3 +1,3 @@
-from Controllers import app
+from Controllers import application
 if __name__ == '__main__':
-    app.main()
+    application.main()
