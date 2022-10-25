@@ -13,6 +13,10 @@ class FlaskAppWrapper():
         self.application = Flask(__name__)
         self._config()
         self._add_services()
+
+        @self.application.route('/', methods=['GET'])
+        def index():
+            return jsonify({"success": True}), 200
         
         @self.application.route('/getTableSessions/', methods = ['GET'])
         def __table_Sessions():
