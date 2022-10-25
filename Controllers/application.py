@@ -244,7 +244,8 @@ class FlaskAppWrapper():
 
 def main():
     application = FlaskAppWrapper()
-    application.run(True, host='0.0.0.0', port=5000)
+    # application.run(True, host='0.0.0.0', port=5000)
+    application.run()
     return application
 
 if __name__ == '__main__':
