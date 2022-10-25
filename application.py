@@ -1,3 +1,3 @@
-from Service.Controllers import app
+from Controllers import app
 if __name__ == '__main__':
     app.main()
