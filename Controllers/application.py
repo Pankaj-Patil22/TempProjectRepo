@@ -24,7 +24,7 @@ class FlaskAppWrapper():
     
 
     def run(self, debug,  host, port):
-        self.application.run(debug=debug, host=host, port=port)
+        self.application.run()
 
 
 def main():
