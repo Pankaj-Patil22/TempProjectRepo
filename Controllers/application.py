@@ -238,8 +238,12 @@ class FlaskAppWrapper():
         response.headers.add("Access-Control-Allow-Origin", "*")
         return response
 
-    def run(self, debug,  host, port):
-        self.application.run(debug=debug, host=host, port=port)
+    # def run(self, debug,  host, port):
+    #     self.application.run(debug=debug, host=host, port=port)
+
+    def run(self):
+        self.application.debug = True
+        self.application.run()
 
 
 def main():
